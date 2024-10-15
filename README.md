@@ -16,8 +16,8 @@ This Inventory Management System is a Spring Boot application that provides a RE
 
 1. Clone the repository:
 
-git clone https://github.com/rmehta12/Inventory-Management-System.git
-cd inventory
+&nbsp;&nbsp;&nbsp;&nbsp;git clone https://github.com/rmehta12/Inventory-Management-System.git <br>
+&nbsp;&nbsp;&nbsp;&nbsp;cd inventory
 
 2. Configure the database:
 
@@ -31,11 +31,11 @@ cd inventory
 
 3. Build the project:
 
-mvn clean install
+&nbsp;&nbsp;&nbsp;&nbsp;mvn clean install
 
 4. Run the application:
 
-mvn spring-boot:run
+&nbsp;&nbsp;&nbsp;&nbsp;mvn spring-boot:run
 
 The application will start and be available at `http://localhost:8080`.
 
@@ -47,7 +47,7 @@ The application will start and be available at `http://localhost:8080`.
 - **Method:** GET
 - **Response:** List of all items
 - **Response Format:**
-json
+json <br>
 [
  {
    "id": 1,
@@ -64,12 +64,12 @@ json
 ]
 
 ### Get Item by ID
-URL: /api/items/{id}
-Method: GET
-URL Params: id=[int]
-Response: Single item details
-Response Format:
-json
+- **URL:** `/api/items/{id}`
+- **Method:** GET
+- **URL Params:** id=[int]
+- **Response:** Single item details
+- **Response Format:**
+json <br>
 {
   "id": 1,
   "name": "Laptop",
@@ -78,41 +78,45 @@ json
 }
 
 ### Create New Item
-URL: /api/items
-Method: POST
-Request Body:
-json
+
+- **URL:** `/api/items`
+- **Method:** POST
+- **Response:** Created item details
+- **Response Format:**
+json <br>
 {
   "name": "Keyboard",
   "quantity": 75,
   "price": 49.99
 }
-Response: Created item details
 
 ### Update Item
-URL: /api/items/{id}
-Method: PUT
-URL Params: id=[int]
-Request Body:
-json
+
+- **URL:** `/api/items/{id}`
+- **Method:** PUT
+- **URL Params:** id=[int]
+- **Response:** Updated item details
+- **Response Format:**
+json <br>
 {
   "name": "Updated Laptop",
   "quantity": 60,
   "price": 1099.99
 }
-Response: Updated item details
 
 ### Delete Item
-URL: /api/items/{id}
-Method: DELETE
-URL Params: id=[int]
-Response: No content (204 status code)
+
+- **URL:** `/api/items/{id}`
+- **Method:** DELETE
+- **URL Params:** id=[int]
+- **Response:** No content (204 status code)
+
 
 
 ### Error Handling
-The API uses standard HTTP status codes to indicate the success or failure of requests. In case of errors, a JSON response with an error message will be returned.
+The API uses standard HTTP status codes to indicate the success or failure of requests. In case of errors, a JSON response with an error message will be returned.<br>
 Example error response:
-json
+json<br>
 {
   "timestamp": "2024-10-15T10:30:45.123Z",
   "status": 404,
