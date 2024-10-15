@@ -1,5 +1,6 @@
 package com.project.inventory.service;
 
+import com.project.inventory.exception.ResourceNotFoundException;
 import com.project.inventory.model.Item;
 import com.project.inventory.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +18,30 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public Item getItemById(int id) {
-        return itemRepository.findById(id).orElseThrow(() -> new RuntimeException("Item Not Found"));
+    public Item getItemById(int id) throws ResourceNotFoundException {
+        return itemRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Item not found for this id :: " + id));
     }
 
     public Item createItem(Item item) {
         return itemRepository.save(item);
     }
 
-    public Item updateItem(int id, Item itemDetails) {
-        Item item = itemRepository.findById(id).orElseThrow(()-> new RuntimeException("Product Not Found"));
+    public Item updateItem(int id, Item itemDetails) throws ResourceNotFoundException {
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Item not found for this id :: " + id));
+        
         item.setName(itemDetails.getName());
         item.setQuantity(itemDetails.getQuantity());
         item.setPrice(itemDetails.getPrice());
+        
         return itemRepository.save(item);
     }
 
-    public void deleteItem(int id) {
-        itemRepository.deleteById(id);
+    public void deleteItem(int id) throws ResourceNotFoundException {
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Item not found for this id :: " + id));
+        
+        itemRepository.delete(item);
     }
 }

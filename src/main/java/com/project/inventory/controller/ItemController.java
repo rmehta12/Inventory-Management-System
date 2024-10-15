@@ -1,8 +1,10 @@
 package com.project.inventory.controller;
 
+import com.project.inventory.exception.ResourceNotFoundException;
 import com.project.inventory.model.Item;
 import com.project.inventory.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +22,9 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
-    public Item getItemById(@PathVariable int id) {
-        return itemService.getItemById(id);
+    public ResponseEntity<Item> getItemById(@PathVariable int id) throws ResourceNotFoundException {
+        Item item = itemService.getItemById(id);
+        return ResponseEntity.ok(item);
     }
 
     @PostMapping
@@ -30,13 +33,14 @@ public class ItemController {
     }
 
     @PutMapping("/{id}")
-    public Item updateItem(@PathVariable int id, @RequestBody Item itemDetails) {
+    public ResponseEntity<Item> updateItem(@PathVariable int id, @RequestBody Item itemDetails) throws ResourceNotFoundException {
         Item updatedItem = itemService.updateItem(id, itemDetails);
-        return updatedItem;
+        return ResponseEntity.ok(updatedItem);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteItem(@PathVariable int id) {
+    public ResponseEntity<?> deleteItem(@PathVariable int id) throws ResourceNotFoundException {
         itemService.deleteItem(id);
+        return ResponseEntity.ok().build();
     }
 }
